@@ -2,9 +2,17 @@
 
 To integrate mediawiki as an external source we will need to do the follwoing:
 
-1. Extend BrowserBible with a plugin that pulls the commentary data from media wiki as a json file.
-2. Create a simplified version of mediawiki that pulls only the commentary information via iframe into browserbible.
-2. Figure out a way to organize the wiki so that the json file can be retrieved.
+
+1. We need to have a way for the editors of the commentary to enter the scripture references that each commentary page is about. These links then need to be generated in media wiki as a json file. 
+
+2. Create an alternate page that uses the text of the commentary but is styled appropriately for browserbible.
+
+3. We need to create a plugin for browserbible to use the json data from mediawiki to display the commentary articles. Browser bible automatically uses the json file to synchronize any of the bible versions with the commentary window.
+
+
+
+
+
 
 ## Extend BrowserBible (5 hours)
 
