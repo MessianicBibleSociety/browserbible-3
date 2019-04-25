@@ -14,7 +14,7 @@ To integrate mediawiki as an external source we will need to do the follwoing:
 
 
 
-## Extend BrowserBible (5 hours)
+## Extend BrowserBible (5 hours + 1 hour for testing)
 
 We need to create a plugin that is based on the browserbible media plugin so that the commentary will be loaded into an iframe and be synchronized when the user navigates through bible windows.
 
@@ -25,7 +25,7 @@ We need to create a plugin that is based on the browserbible media plugin so tha
 3. Syncronization should be handled by the built in mechanisms
 
 
-## MediaWiki (10 hours)
+## MediaWiki (10 hours + 2 hours for testing)
 
 We need to:
 
