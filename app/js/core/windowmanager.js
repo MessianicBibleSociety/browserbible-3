@@ -3,7 +3,7 @@ var WindowManager = function(node, app) {
 
 	var windows = [];
 
-	function addWindow(className, data) {
+	function addWindow(className, data, fixed) {
 
 		var id = 'win' + (new Date()).getTime().toString();
 
@@ -14,9 +14,9 @@ var WindowManager = function(node, app) {
 		// test for classname
 		if (typeof window[className] == 'undefined')
 			return;
-
+		if(!fixed) fixed = 'middle'; //default to middle section
 		// create window and add to array
-		var win = new Window(id, node, className, data, ext);
+		var win = new Window(id, node.find('.'+fixed), className, data, fixed, ext);
 		windows.push(win);
 
 		var tabWidth = win.tab.outerWidth();
@@ -143,7 +143,8 @@ var WindowManager = function(node, app) {
 		for (var i=0, il=windows.length; i<il; i++) {
 			settingsForAllWindows.push({
 				'windowType': windows[i].className,
-				'data': windows[i].getData()
+				'data': windows[i].getData(),
+				'fixed': windows[i].fixed
 			});
 		}
 
@@ -163,12 +164,19 @@ var WindowManager = function(node, app) {
 	return ext;
 };
 
-var Window = function(id, parentNode, className, data, manager) {
+var Window = function(id, parentNode, className, data, fixed, manager) {
 
 	var ext = {},
 		node = $('<div class="window ' + className + ' active"></div>')
 					.appendTo(parentNode),
-		closeBtn = $('<div class="close-container"><span class="close-button"></span></div>')
+		tab = $('<div class="window-tab ' + className + ' active">' +
+					'<div class="window-tab-inner">' +
+						'<span class="window-tab-label ' + className + '-tab">' + className + '</span>' +
+					'</div>' +
+				'</div>')
+					.appendTo( $('body') );
+		if(fixed == 'middle'){
+			closeBtn = $('<div class="close-container"><span class="close-button"></span></div>')
 					.appendTo(node)
 					.find('.close-button')
 					.on('click', function() {
@@ -176,20 +184,15 @@ var Window = function(id, parentNode, className, data, manager) {
 
 
 						manager.remove(id);
-					}),
-		tab = $('<div class="window-tab ' + className + ' active">' +
-					'<div class="window-tab-inner">' +
-						'<span class="window-tab-label ' + className + '-tab">' + className + '</span>' +
-					'</div>' +
-				'</div>')
-					.appendTo( $('body') );
-
+					});
+		}
 	// make sure this one is selected
 	node.siblings('.window').removeClass('active');
 	tab.siblings('.window-tab').removeClass('active');
 
 	ext.id = id;
 	ext.className = className;
+	ext.fixed = fixed;
 	ext.node = node;
 	ext.tab = tab;
 

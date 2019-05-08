@@ -5,7 +5,7 @@ var App = function() {
 		body = $(document.body),
 		container = $('<div class="windows-container"></div>').appendTo(body),
 		header = $('<div class="windows-header"></div>').appendTo(container),
-		main = $('<div class="windows-main"></div>').appendTo(container),
+		main = $('<div class="windows-main"><div class="left"></div><div class="middle"></div><div class="right"></div></div>').appendTo(container),
 		footer = $('<div class="windows-footer"></div>').appendTo(container),
 		settingsKey = 'app-windows',
 		ext = {},
@@ -49,6 +49,17 @@ var App = function() {
 		*/
 
 		// create windows
+		// loop through and find fixed windows
+		var fixedleft = [];
+		var fixedright = [];
+		var middle = [];
+		for (var i=0, il=settings.windows.length; i<il; i++) {
+			var setting = settings.windows[i];
+			if(setting.fixed == 'left') fixedleft.push(setting);
+			else if (setting.fixed == 'right') fixedright.push(setting);
+			else middle.push(setting);
+		}
+		settings.windows = fixedleft.concat(middle).concat(fixedright);
 		for (var i=0, il=settings.windows.length; i<il; i++) {
 			var setting = settings.windows[i],
 				windowClassName = setting.windowType;
@@ -66,7 +77,7 @@ var App = function() {
 			}
 
 			//console.log('create window', setting, windowClassName);
-			windowManager.add(windowClassName, setting.data);
+			windowManager.add(windowClassName, setting.data, setting.fixed);
 		}
 		// make sure first is active
 		$('.window, .window-tab').removeClass('active');
