@@ -1,6 +1,6 @@
 # Media Wiki Plan for Commentary
 
-## In Progress:
+## In Progress (10 hours + unknown for Article Editing):
 
 1. Create an simplified version of the commentary page that can be displayed in browserbible (2 hours for base) (in progress) (3 hours)
 
