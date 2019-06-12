@@ -17,9 +17,11 @@
 	* Setup user group for commentary editors that allow members to edit article but they need to be approved by Gabizon
 	* add terms of use and copyright acceptance
 
-4. Notifications: 
+4. Notifications (4 hours): 
 
 	* Editors need to be notified by email when a comment is made or a new article is posted.
+
+
 
 
 
